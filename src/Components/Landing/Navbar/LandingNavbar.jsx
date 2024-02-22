@@ -1,7 +1,10 @@
- import './LandingNavbar.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './LandingNavbar.css'
  function LandingNavbar(){
     return(
-        
+        <>
+
         <div className="navbar">
     <ul className="link">
       <li>
@@ -21,6 +24,10 @@
     Get Started
   </a>
   </div>
+  <Link to={"/login"} className='loginbtn'>
+    Login
+  </Link>
+  </>
     )
 }
 export default LandingNavbar;
