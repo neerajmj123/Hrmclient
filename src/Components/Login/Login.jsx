@@ -1,25 +1,7 @@
 import React, { useState } from "react";
 import './Login.css' 
 import axios from 'axios';
-// import Content from "../Content/Content";
 
-// const App = () => {
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   const handleLoginSuccess = () => {
-//     setIsLoggedIn(true);
-//   };
-
-//   return (
-//     <div className="App">
-//       {!isLoggedIn ? (
-//         <Login handleLoginSuccess={handleLoginSuccess} />
-//       ) : (
-//         <Content />
-//       )}
-//     </div>
-//   );
-// };
 function Login  () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
