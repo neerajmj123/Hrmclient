@@ -1,52 +1,54 @@
 import React, { useState } from "react";
 import './Login.css' 
-import axios from "axios";
-import Content from "../Content/Content";
+import axios from 'axios';
+// import Content from "../Content/Content";
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+// const App = () => {
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-  };
+//   const handleLoginSuccess = () => {
+//     setIsLoggedIn(true);
+//   };
 
-  return (
-    <div className="App">
-      {!isLoggedIn ? (
-        <Login handleLoginSuccess={handleLoginSuccess} />
-      ) : (
-        <Content />
-      )}
-    </div>
-  );
-};
-const Login = () => {
-  const [username, setUsername] = useState('')
+//   return (
+//     <div className="App">
+//       {!isLoggedIn ? (
+//         <Login handleLoginSuccess={handleLoginSuccess} />
+//       ) : (
+//         <Content />
+//       )}
+//     </div>
+//   );
+// };
+function Login  () {
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = async(event)=>{
-    event.preventDefault();
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4102/login',{
-        username:username,
-        password:password
-      })
+      const response = await axios.post('http://localhost:3000/login',{
+        email,
+        password
+      });
       if(response.data.success){
-        alert("login sucessfull")
+        const token =response.data.data;
+        localStorage.setItem('token',token);
+        alert(response.data.message);
       }else{
-        alert("Invalid login")
+        alert(response.data.message)
       }
     } catch (error) {
-      alert("an error occured ")
+      console.error('login failed',error)
     }
-  }
+  };
   return (
     <>
       <div className="wrapper">
         <form action="" onSubmit={handleSubmit}>
           <h1>Login</h1>
           <div className="input-box">
-            <input type="text1" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)} required="" />
+            <input type="email" placeholder="Username" value={email} onChange={(e)=>setEmail(e.target.value)} required="" />
           </div>
           <div className="input-box">
             <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required="" />
