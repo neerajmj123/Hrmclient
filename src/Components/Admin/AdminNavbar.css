@@ -17,6 +17,8 @@ li{
 a{
     text-decoration: none; 
     color: white;
+    text-align: center;
+    padding-bottom: 5px;
 }
 a:hover{
     color: burlywood;
@@ -40,11 +42,11 @@ gap: 2rem;
     border: 2px solid rgba(225,225,225,2);
     padding: 0.5rem 1rem;
     border-radius: 15px;
-    text-align: center;
     cursor: pointer;
 }
 .action-btn :hover{
     color: white;
+    width: 55px;
 }
 .btn{
     display: flex;
@@ -61,7 +63,7 @@ gap: 2rem;
     margin-bottom: 20px;
     cursor: pointer;
 }
-.loginbtn{
+.addbtn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,17 +74,7 @@ gap: 2rem;
     margin-left: 850px;
     padding: 10px;
 }
-.adminsetup{
-    position: absolute;
-    width: 120px;
-    top: 7rem;
-    right: 7.9rem;
-    padding: 15px;
-    border-radius: 15px;
-    border: 1px solid white;
-    color: white;
-}
-.setup{
-    margin: 5px;
-    width: 20px;
+img{
+    width: 30px;
+    
 }

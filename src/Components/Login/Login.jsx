@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './Login.css' 
 import axios from 'axios';
 
@@ -35,9 +36,9 @@ function Login  () {
           <div className="input-box">
             <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required="" />
           </div>
-          <button type="submit" className="btn">
-            Login
-          </button>
+          <Link to={"/admin"} className='btn'>
+           Login
+          </Link>
         </form>
       </div>
     </>

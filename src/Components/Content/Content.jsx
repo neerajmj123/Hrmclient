@@ -26,31 +26,28 @@ const Content = () => {
 
   return (
     <div className="form-container">
-      <h2>Add Personal Information</h2>
+      <h2>Add User Information</h2>
       <form onSubmit={handleSubmit} className="form">
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input type="text"id="name"
+          <input type="text"id="name"placeholder='Name'
           />
         </div>
         <div className="form-group">
-          <label htmlFor="age">Age:</label>
-          <input type="number"id="age"
+          <input type="number"id="age"placeholder='Age'
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number:</label>
-          <input type="tel"id="phoneNumber"
+
+          <input type="tel"id="phoneNumber"placeholder='Phone Number'
           />
         </div>
         <div className="form-group">
-          <label htmlFor="pincode">Pincode:</label>
-          <input type="text"id="pincode"
+         
+          <input type="text"id="pincode" placeholder='Pincode' 
           />
         </div>
         <div className="form-group">
-          <label htmlFor="dateOfBirth">Date of Birth:</label>
-          <input type="date"id="dateOfBirth"
+          <input type="date"id="dateOfBirth" placeholder='Date of Birth'
           />
         </div>
         <button type="submit">Submit</button>
