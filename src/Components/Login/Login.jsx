@@ -1,28 +1,35 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import './Login.css' 
+import { useNavigate } from "react-router-dom";
+import './Login.css'
 import axios from 'axios';
 
-function Login  () {
+function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const handleSubmit = async(e)=>{
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/login',{
+      const response = await axios.post('http://localhost:3000/login', {
         email,
         password
-      });
-      if(response.data.success){
-        const token =response.data.data;
-        localStorage.setItem('token',token);
+    },{
+      method :"POST",
+      headers:{
+        "Content-Type":'application/json'
+      }
+    })
+
+      if (response.data.success) {
+        const token = response.data.data;
+        localStorage.setItem('token', token);
+        navigate('/admin')
         alert(response.data.message);
-      }else{
+      } else {
         alert(response.data.message)
       }
     } catch (error) {
-      console.error('login failed',error)
+      console.error('login failed', error)
     }
   };
   return (
@@ -31,14 +38,12 @@ function Login  () {
         <form action="" onSubmit={handleSubmit}>
           <h1>Login</h1>
           <div className="input-box">
-            <input type="email" placeholder="Username" value={email} onChange={(e)=>setEmail(e.target.value)} required="" />
+            <input type="email" placeholder="Username" value={email} onChange={(e) => setEmail(e.target.value)} required="" />
           </div>
           <div className="input-box">
-            <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required="" />
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required="" />
           </div>
-          <Link to={"/admin"} className='btn'>
-           Login
-          </Link>
+          <button type="submit" className="btn">Login</button>
         </form>
       </div>
     </>

@@ -3,6 +3,8 @@ import './Content.css'
 
 const Content = () => {
   const [name, setName] = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPassword]=useState('');
   const [age, setAge] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [pincode, setPincode] = useState('');
@@ -12,12 +14,16 @@ const Content = () => {
     e.preventDefault();
     console.log({
       name,
+      email,
+      password,
       age,
       phoneNumber,
       pincode,
       dateOfBirth
     });
     setName('');
+    setEmail('');
+    setPassword('');
     setAge('');
     setPhoneNumber('');
     setPincode('');
