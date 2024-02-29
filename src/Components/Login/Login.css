@@ -55,3 +55,8 @@
     margin-bottom: 20px;
     cursor: pointer;
 }
+.error{
+    text-align: center;
+    color: red;
+    margin-top: 4px;;
+}
