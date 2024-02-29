@@ -4,6 +4,7 @@ import Landing from "./Components/Landing/Landing"
 import Login from "./Components/Login/Login"
 import Admin from "./Components/Admin/Admin";
 import Content from "./Components/Content/Content"
+import ListUser from "./Components/ListUser/ListUser";
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" Component={Login}/>
         <Route  path="/admin" Component={Admin}/>
         <Route path="/content" Component={Content}/>
+        <Route path="/list" Component={ListUser}/>
         </Routes>
       </Router>
 

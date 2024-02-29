@@ -2,9 +2,7 @@ import React,{useState}from "react";
 import { BrowserRouter as Router, Route,Routes,Link } from 'react-router-dom';
 import "./AdminNavbar.css"
 import image from './images/icons8-admin-100.png'
-import Admindrop from "./Admindrop";
 function AdminNavbar(){
-    const[dropbox,setDropbox]=useState(false)
     return(
         <>
         <nav>
@@ -29,6 +27,9 @@ function AdminNavbar(){
   </div>
   <Link to={"/content"} className='addbtn'>
     Add user 
+  </Link>
+  <Link to={"/list"} className='addbtn'>
+    Users
   </Link>
   {/* <Admindrop/> */}
         </nav>
