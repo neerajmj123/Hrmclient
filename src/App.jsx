@@ -5,6 +5,7 @@ import Login from "./Components/Login/Login"
 import Admin from "./Components/Admin/Admin";
 import Content from "./Components/Content/Content"
 import ListUser from "./Components/ListUser/ListUser";
+import UserDetails from "./Components/UserDetails/UserDetails";
 function App() {
 
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route  path="/admin" Component={Admin}/>
         <Route path="/content" Component={Content}/>
         <Route path="/list" Component={ListUser}/>
+        <Route path="/userDetails/:userId" Component={UserDetails}/>
         </Routes>
       </Router>
 
