@@ -9,7 +9,7 @@ function ListUser(){
     useEffect(()=>{
         const fethData = async()=>{
             try {
-                const response = await axios.get('http://localhost:3000/getuser')
+                const response = await axios.get(`http://localhost:3000/getuser`)
                 setData(response.data.data)
             } catch (error) {
                 console.error("Error in fething Data",error) 
@@ -30,13 +30,12 @@ function ListUser(){
             <h1>Users List</h1>
         </div>
         {data.length ?(data.map((user)=>(
-            <div className="box" key={user.id}>
+            <div className="box" key={user._id}>
                 <h3>Name:{user.name}</h3>
                 <h3>Email:{user.email}</h3>
                 <h3>Phone no:{user.phone_no}</h3>
-
                 <div>
-                    <Link to={'/userDetails/${user._id}'}> <button onClick={()=>HandleViewUser(user._id)}>View</button></Link>
+                    <Link to={`/userDetails/${user._id}`}> <button onClick={()=>HandleViewUser(user._id)}>View</button></Link>
                 </div>
             </div>
         ))
