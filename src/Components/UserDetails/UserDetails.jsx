@@ -27,6 +27,7 @@ function UserDetails(){
     const handleSubmit = async(e) => {
       try {
         await axios.put(`http://localhost:3000/updateUser/${userId}`,user);
+        window.alert("Data updated successfully");
         console.log("Data updated succesfully")
       } catch (error) {
         console.log("error updating user details",error);
