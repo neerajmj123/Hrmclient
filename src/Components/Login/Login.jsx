@@ -55,8 +55,8 @@ const passwordValidate=(value)=>{
         alert(response.data.message)
       }
     } catch (error) {
-      console.error('login failed', error)
-      alert('Login Failed')
+      console.error('login failed', error.response.data.message)
+      alert(error.response.data.message ||'Login Failed')
     }
   };
   return (
