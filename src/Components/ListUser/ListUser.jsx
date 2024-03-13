@@ -9,7 +9,11 @@ function ListUser(){
     useEffect(()=>{
         const fethData = async()=>{
             try {
-                const response = await axios.get(`http://localhost:3000/getuser`)
+                const response = await axios.get(`http://localhost:3000/getuser`,{
+                    headers :{
+                        'Authorization':`Bearer ${token}`,
+                    }
+                })
                 setData(response.data.data)
             } catch (error) {
                 console.error("Error in fething Data",error) 
