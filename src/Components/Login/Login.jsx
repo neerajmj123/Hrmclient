@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Login.css'
 import axios from 'axios';
+import Swal from 'sweetalert2';
+
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -34,7 +36,19 @@ const passwordValidate=(value)=>{
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    if(!email || !password){
+
+      if(!email){
+        setEmailError("Please enter Email")
+      }
+      if(!password){
+        setPasswordError("Please enter password")
+      }
+      return;
+    }
+    if(emailerror || passworderror){
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:3000/login', {
         email,
@@ -50,13 +64,28 @@ const passwordValidate=(value)=>{
         const token = response.data.data;
         localStorage.setItem('token', token);
         navigate('/admin')
-        alert(response.data.message);
+       Swal.fire({
+        icon : 'success',
+        title :'Login Successfull',
+        text : response.data.message,
+        // background : 'rgba(0,0,0,0.8)',
+
+       })
       } else {
-        alert(response.data.message)
+        Swal.fire({
+          icon:'error',
+          title:'Login Failed',
+          text:response.data.message,
+          // background : 'rgba(0,0,0,0.8)',
+        })
       }
     } catch (error) {
       console.error('login failed', error.response.data.message)
-      alert(error.response.data.message ||'Login Failed')
+      Swal.fire({
+        icon :'error',
+        title:'Login failed',
+        text : error.response.data.message || 'Login failed'
+      })
     }
   };
   return (

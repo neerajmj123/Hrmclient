@@ -6,6 +6,15 @@ import './ListUser.css';
 
 function ListUser(){
     const[data,setData]=useState([]);
+
+    const [token,setToken]=useState('');
+    useEffect(()=>{
+       const storedToken = localStorage.getItem('token')
+        if(storedToken){
+          setToken(storedToken)
+        }  
+        console.log(token);
+    },[]);
     useEffect(()=>{
         const fethData = async()=>{
             try {
@@ -19,8 +28,10 @@ function ListUser(){
                 console.error("Error in fething Data",error) 
             }
         };
+        if(token){
         fethData();
-    },[])
+        }
+    },[]);
     const HandleViewUser = (userId) =>{
         if(userId  !== undefined){
             console.log("view button clicked for user Id",userId);

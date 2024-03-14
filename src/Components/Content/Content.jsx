@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Content.css'
 
 function Content(){
@@ -14,7 +14,13 @@ function Content(){
   const [phone_noError,setPhone_noError] =useState('');
   const [pincode, setPincode] = useState('');
   const [pincodeError,setPincodeError]=useState('')
-
+  const [token,setToken]=useState('');
+ useEffect(()=>{
+  const storedToken = localStorage.getItem('token')
+  if(storedToken){
+    setToken(storedToken)
+  }
+ })
   const nameValidate =(value)=>{
     const name_val=/^[A-Za-z]{6}$/i;
     if(!value){
@@ -89,18 +95,33 @@ function Content(){
       const response = await fetch('http://localhost:3000/createUser',{
         method :'POST',
         headers:{
+          'Authorization':`Bearer${token}`,
           'Content-Type':'application/json',
         },
         body:json_data,
       })
-
-      if(response.ok){
-        const responseData = await response.json();
-        alert(responseData.message)
-      }else{
-        const errorData =await response.json();
-        alert(errorData.message)
+      const responseData = await response.json();
+      if(responseData.errors){
+        if(responseData.errors.name||responseData.errors.name){
+          setNameError(responseData.errors.name || responseData.errors.name)
+        }
+        if(responseData.errors.age||responseData.errors.age){
+          setAgeError(responseData.errors.age || responseData.errors.age)
+        }
+        if(responseData.errors.email||responseData.errors.email){
+          setEmailError(responseData.errors.email || responseData.errors.email)
+        }
+        if(responseData.errors.password||responseData.errors.password){
+          setPasswordError(responseData.errors.password || responseData.errors.password)
+        }
+        if(responseData.errors.phone_no||responseData.errors.phone_no){
+          setPhone_noError(responseData.errors.phone_no || responseData.errors.phone_no)
+        }
+        if(responseData.errors.pincode||responseData.errors.pincode){
+          setPincodeError(responseData.errors.pincode || responseData.errors.pincode)
+        }
       }
+   
     } catch (error) {
       console.error('Insertion error',error)
       alert('Something error')
