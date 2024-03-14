@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Content.css'
+import Swal from 'sweetalert2'
 
 function Content(){
   const [name, setName] = useState('');
@@ -120,11 +121,21 @@ function Content(){
         if(responseData.errors.pincode||responseData.errors.pincode){
           setPincodeError(responseData.errors.pincode || responseData.errors.pincode)
         }
+      }else if(responseData.success){
+        Swal .fire({
+          icon : "success",
+          title : "success",
+          text : response.message
+        })
       }
-   
+  
     } catch (error) {
       console.error('Insertion error',error)
-      alert('Something error')
+      Swal.fire({
+        icon : "error",
+        title : "error",
+        text : "invalid email or password"
+      })
     }
   }
 
