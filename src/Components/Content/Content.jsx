@@ -133,7 +133,7 @@ function Content(){
           setPincodeError(responseData.errors.pincode || responseData.errors.pincode)
         }
       }else if(responseData.success){
-        const passwordFromServer = responseData.password;
+        const passwordFromServer = response.data.password;
         setGeneratedPassword(passwordFromServer);
         Swal .fire({
           icon : "success",
@@ -183,6 +183,7 @@ function Content(){
         </div>
         <button type="submit">Submit</button>
       </form>
+      {generatedPassword && <p>Passwor_generated :{generatedPassword}</p>}
     </div>
   );
 };
