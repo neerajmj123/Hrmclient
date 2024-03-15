@@ -1,29 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './Content.css'
-import Swal from 'sweetalert2'
-// import {useNavigate} from 'react-router-dom'
+import './Content.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Content(){
 
-  // const navigate = useNavigate();
-  // const isToken = ()=>{
-  //   const token = localStorage.getItem('token')
-  //   return ! token;
-  // }
-  // if(! isToken()){
-  //   Swal.fire({
-  //     title : 'Error',
-  //     text :'You have to login',
-  //     icon:'error',
-  //     button :'Login',
-  //   }).then(()=>{
-  //     navigate('/login')
-  //   });
-  //   return null;
-  // }
-
-
+  
   const [name, setName] = useState('');
   const [nameError,setNameError]=useState('');
   const [age, setAge] = useState('');
@@ -38,12 +20,16 @@ function Content(){
   const [pincodeError,setPincodeError]=useState('')
   const [token,setToken]=useState('');
   const [generatedPassword,setGeneratedPassword] = useState('');
+
+
  useEffect(()=>{
   const storedToken = localStorage.getItem('token')
   if(storedToken){
     setToken(storedToken)
   }
- })
+ },[]);
+
+
   const nameValidate =(value)=>{
     const name_val=/^[A-Za-z]{6}$/i;
     if(!value){
@@ -113,15 +99,17 @@ function Content(){
     try {
       const data = {name,age,email,phone_no,pincode};
       const json_data = JSON.stringify(data);
-      console.log("json_data",json_data)
+      console.log("jsondata",json_data)
 
+      console.log("token",token)
+    
       const response = await axios.post('http://localhost:3000/createUser',json_data,{
       
         headers:{
-          'Authorization':`Bearer ${token}`,
+          Authorization:`Bearer ${token}`,
           'Content-Type':'application/json',
         },
-        body:json_data,
+        body : json_data,
       })
       const responseData =  response.data;
       console.log(responseData)
@@ -145,12 +133,12 @@ function Content(){
           setPincodeError(responseData.errors.pincode || responseData.errors.pincode)
         }
       }else if(responseData.success){
-        const passwordFromServer = response.data.password;
+        const passwordFromServer = responseData.password;
         setGeneratedPassword(passwordFromServer);
         Swal .fire({
           icon : "success",
           title : "success",
-          text : response.message
+          text : responseData.message
         })
       }
   
