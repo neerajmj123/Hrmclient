@@ -1,21 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import './Content.css'
 import Swal from 'sweetalert2'
+// import {useNavigate} from 'react-router-dom'
+import axios from 'axios';
 
 function Content(){
+
+  // const navigate = useNavigate();
+  // const isToken = ()=>{
+  //   const token = localStorage.getItem('token')
+  //   return ! token;
+  // }
+  // if(! isToken()){
+  //   Swal.fire({
+  //     title : 'Error',
+  //     text :'You have to login',
+  //     icon:'error',
+  //     button :'Login',
+  //   }).then(()=>{
+  //     navigate('/login')
+  //   });
+  //   return null;
+  // }
+
+
   const [name, setName] = useState('');
   const [nameError,setNameError]=useState('');
   const [age, setAge] = useState('');
   const [ageError,setAgeError]=useState('')
   const [email,setEmail] = useState('');
   const [emailError,setEmailError]=useState('');
-  const [password,setPassword]=useState('');
-  const [passwordError,setPasswordError]=useState('');
+  // const [password,setPassword]=useState('');
+  // const [passwordError,setPasswordError]=useState('');
   const [phone_no, setPhone_no] = useState('');
   const [phone_noError,setPhone_noError] =useState('');
   const [pincode, setPincode] = useState('');
   const [pincodeError,setPincodeError]=useState('')
   const [token,setToken]=useState('');
+  const [generatedPassword,setGeneratedPassword] = useState('');
  useEffect(()=>{
   const storedToken = localStorage.getItem('token')
   if(storedToken){
@@ -53,17 +75,17 @@ function Content(){
       setEmailError("")
     }
   }
-  const passwordValidate=(value)=>{
-    const password_val=/^[a-z0-9_@\.]{8,}$/;
+  // const passwordValidate=(value)=>{
+  //   const password_val=/^[a-z0-9_@\.]{8,}$/;
     
-    if(!value){
-      setPasswordError("Enter Your Password")
-    }else if(!password_val.test(value)){
-      setPasswordError("Password must be 8 Characters")
-    }else{
-      setPasswordError("")
-    }
-  }
+  //   if(!value){
+  //     setPasswordError("Enter Your Password")
+  //   }else if(!password_val.test(value)){
+  //     setPasswordError("Password must be 8 Characters")
+  //   }else{
+  //     setPasswordError("")
+  //   }
+  // }
   const phonenoValidate=(value)=>{
     const phoneno_val= /^(\+\d{1,3}[- ]?)?\d{10}$/;
     if(!value){
@@ -89,19 +111,20 @@ function Content(){
   const handleSubmit =async(e) => {
     e.preventDefault();
     try {
-      const data = {name,age,email,password,phone_no,pincode};
+      const data = {name,age,email,phone_no,pincode};
       const json_data = JSON.stringify(data);
       console.log("json_data",json_data)
 
-      const response = await fetch('http://localhost:3000/createUser',{
-        method :'POST',
+      const response = await axios.post('http://localhost:3000/createUser',json_data,{
+      
         headers:{
-          'Authorization':`Bearer${token}`,
+          'Authorization':`Bearer ${token}`,
           'Content-Type':'application/json',
         },
         body:json_data,
       })
-      const responseData = await response.json();
+      const responseData =  response.data;
+      console.log(responseData)
       if(responseData.errors){
         if(responseData.errors.name||responseData.errors.name){
           setNameError(responseData.errors.name || responseData.errors.name)
@@ -112,9 +135,9 @@ function Content(){
         if(responseData.errors.email||responseData.errors.email){
           setEmailError(responseData.errors.email || responseData.errors.email)
         }
-        if(responseData.errors.password||responseData.errors.password){
-          setPasswordError(responseData.errors.password || responseData.errors.password)
-        }
+        // if(responseData.errors.password||responseData.errors.password){
+        //   setPasswordError(responseData.errors.password || responseData.errors.password)
+        // }
         if(responseData.errors.phone_no||responseData.errors.phone_no){
           setPhone_noError(responseData.errors.phone_no || responseData.errors.phone_no)
         }
@@ -122,6 +145,8 @@ function Content(){
           setPincodeError(responseData.errors.pincode || responseData.errors.pincode)
         }
       }else if(responseData.success){
+        const passwordFromServer = response.data.password;
+        setGeneratedPassword(passwordFromServer);
         Swal .fire({
           icon : "success",
           title : "success",
@@ -130,11 +155,11 @@ function Content(){
       }
   
     } catch (error) {
-      console.error('Insertion error',error)
+      
       Swal.fire({
         icon : "error",
         title : "error",
-        text : "invalid email or password"
+        text : "error in inserting data"
       })
     }
   }
@@ -156,10 +181,10 @@ function Content(){
           <input type="email"id="email"placeholder='Email'value={email} onChange={(e) =>{setEmail(e.target.value),emailValidate(e.target.value)}}/>
           {emailError && <div className="error">{emailError}</div>}
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <input type="password"id="password"placeholder='Password' value={password} onChange={(e) =>{setPassword(e.target.value),passwordValidate(e.target.value)}}/>
           {passwordError && <div className="error">{passwordError}</div>}
-        </div>
+        </div> */}
         <div className="form-group">
           <input type="tel"id="phoneNumber"placeholder='Phone Number' value={phone_no} onChange={(e) =>{setPhone_no(e.target.value),phonenoValidate(e.target.value)}}/>
           {phone_noError && <div className="error">{phone_noError}</div>}

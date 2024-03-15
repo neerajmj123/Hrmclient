@@ -34,7 +34,7 @@ const passwordValidate=(value)=>{
   }
 }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
     if(!email || !password){
 
@@ -63,19 +63,19 @@ const passwordValidate=(value)=>{
       if (response.data.success) {
         const token = response.data.data;
         localStorage.setItem('token', token);
-        navigate('/admin')
        Swal.fire({
         icon : 'success',
         title :'Login Successfull',
         text : response.data.message,
         // background : 'rgba(0,0,0,0.8)',
-
+       }).then(()=>{
+        navigate('/admin')
        })
       } else {
         Swal.fire({
           icon:'error',
           title:'Login Failed',
-          text:response.data.message,
+          text:'Invalid Email or Password',
           // background : 'rgba(0,0,0,0.8)',
         })
       }
