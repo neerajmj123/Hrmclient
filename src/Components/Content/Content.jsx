@@ -83,7 +83,7 @@ function Content(){
     }
   }
   const pincodeValidate=(value)=>{
-    const pincode_val = /^[1-9][0-9]{6}$/;
+    const pincode_val = /^[0-9]{6}$/;
 
     if(!value){
       setPincodeError("Enter Your Pincode")
@@ -143,6 +143,30 @@ function Content(){
       }
   
     } catch (error) {
+      if(error.response){
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers)
+        Swal.fire({
+          icon:'error',
+          title:'eror',
+          text: error.response.data.message,
+        })
+      }else if(error.request){
+        console.log(error.request);
+        Swal.fire({
+          icon:'error',
+          title:'error',
+          text:"no response from server"
+        })
+      }else{
+        console.log("Error",error.message);
+        Swal.fire({
+          icon : 'error',
+          title : 'error',
+          text :'unexpected error'
+        })
+      }
       
       Swal.fire({
         icon : "error",

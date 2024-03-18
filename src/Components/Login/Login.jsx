@@ -91,6 +91,7 @@ const passwordValidate=(value)=>{
   return (
     <>
       <div className="wrapper">
+        <div className="loginform">
         <form action="" onSubmit={handleSubmit}>
           <h1>Login</h1>
           <div className="input-box">
@@ -103,6 +104,7 @@ const passwordValidate=(value)=>{
           </div>
           <button type="submit" className="btn">Login</button>
         </form>
+        </div>
       </div>
     </>
   )

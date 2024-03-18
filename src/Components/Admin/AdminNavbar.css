@@ -64,17 +64,44 @@ gap: 2rem;
     cursor: pointer;
 }
 .addbtn{
-    display: flex;
+    display: inline;
     justify-content: center;
     align-items: center;
     background-color: white;
     width: 7%;
     color: black;
     border-radius: 25px;
-    margin-left: 850px;
+    
+    
     padding: 10px;
-    margin-bottom: 10px;
+
 }
 img{
-    width: 30px;
+    width: 50px;
+}
+.intro{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    padding-bottom: 60px;
+}
+.intro .content {
+    text-align: center;
+}
+.intro .content  h3{
+    font-size: 30px;
+    color: white;
+}
+.intro .content h1 {
+    font-size: 50px; 
+} 
+.intro .content p{
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: white;
+}
+.intro .content .addbtn {
+    margin: 0 5px;
 }

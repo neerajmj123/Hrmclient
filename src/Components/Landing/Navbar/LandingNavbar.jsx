@@ -24,9 +24,11 @@ import './LandingNavbar.css'
     Get Started
   </a>
   </div>
+  <div className='mainbtn'>
   <Link to={"/login"} className='loginbtn'>
     Login
   </Link>
+  </div>
   </>
     )
 }

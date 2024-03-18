@@ -1,12 +1,6 @@
-/* body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-} */
+
 .wrapper{
-    width: 420px;
+    /* width: 420px;
     color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
@@ -16,7 +10,25 @@
     border-radius: 15px;
     padding: 30px 40px;
     margin-left: 750px;
-    margin-top: 145px;
+    margin-top: 145px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.loginform{
+    width: 420px;
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background : transparent;
+    border: 2px solid rgba(225,225,225,.2);
+    border-radius: 15px;
+    padding: 30px 40px;
+    /* margin-left: 750px; */
+    /* margin-top: 145px;  */
 }
 .wrapper h1{
     text-align: center;
