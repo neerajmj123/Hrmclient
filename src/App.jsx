@@ -6,6 +6,7 @@ import Admin from "./Components/Admin/Admin";
 import Content from "./Components/Content/Content";
 import ListUser from "./Components/ListUser/ListUser";
 import UserDetails from "./Components/UserDetails/UserDetails";
+import ChangePassword from "./Components/Changepassword/Changepassword";
 function App() {
 
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/content" Component={Content}/>
         <Route path="/list" Component={ListUser}/>
         <Route path="/userDetails/:userId" Component={UserDetails}/>
+        <Route path="/changePassword" Component={ChangePassword}/>
         </Routes>
       </Router>
 
