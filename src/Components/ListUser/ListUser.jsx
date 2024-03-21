@@ -8,24 +8,35 @@ function ListUser(){
     const[data,setData]=useState([]);
     const [token,setToken]=useState('');
     const [loading,setLoading] = useState(true);
+    const [currentpage,setCurrentpage] = useState(1);
+    const [itemsperpage] = useState(5)
+    const [totalpage,setTotalpage]= useState(1)
 
 
     useEffect(()=>{
        const storedToken = localStorage.getItem('token')
+
         if(storedToken){
           setToken(storedToken)
         }  
         console.log(token);
     },[]);
+
     useEffect(()=>{
         const fetchData = async ()=>{
             try {
                 const response = await axios.get(`http://localhost:3000/getuser`,{
+
+                params :{
+                    page : currentpage,
+                    limit :itemsperpage,
+                },
                     headers :{
                         'Authorization':`Bearer ${token}`,
                     },
                 })
                 setData(response.data.data)
+                setTotalpage(response.data.totalpage);
                 setLoading(false);
             } catch (error) {
                 console.error("Error in fething Data",error) 
@@ -34,14 +45,24 @@ function ListUser(){
         if(token){
         fetchData();
         }
-    },[token]);
+    },[token,currentpage,itemsperpage]);
     const handleViewUser = (userId) =>{
         if(userId  !== undefined){
             console.log("view button clicked for user Id",userId);
         }else{
             console.error('user id is undefined')
         }
-    }
+    };
+    const nextpage= ()=>{
+        if(currentpage < totalpage){
+            setCurrentpage(currentpage+1)
+        }
+    };
+    const previouspage = () =>{
+        if(currentpage>1){
+            setCurrentpage(currentpage-1)
+        }
+    };
     return(
         <>
         <div className="heading">
@@ -53,9 +74,9 @@ function ListUser(){
         data.length ?(
             data.map((user)=>(
             <div className="box" key={user._id}>
-                <h3>Name:{user.name}</h3>
-                <h3>Email:{user.email}</h3>
-                <h3>Phone no:{user.phone_no}</h3>
+                <p><strong>Name :</strong>{user.name}</p>
+                <p><strong>Email:</strong>{user.email}</p>
+                <p><strong>Phone no :</strong>:{user.phone_no}</p>
                 <div>
                     <Link to={`/userDetails/${user._id}`}> 
                     <button onClick={()=>handleViewUser(user._id)}>View</button>
@@ -67,6 +88,11 @@ function ListUser(){
             <h1>No data available</h1>
         )
         )}
+        <div className="pageination">
+            <button onClick={previouspage} disabled={currentpage === 1} className="nextbtn">Previous</button>
+            <span>{currentpage} of {totalpage}</span>
+            <button onClick={nextpage} disabled={currentpage === totalpage} className="nextbtn">Next</button>
+        </div>
         </>
     );
 }

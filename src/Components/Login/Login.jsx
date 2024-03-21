@@ -23,12 +23,12 @@ const emailValidate=(value)=>{
   }
 }
 const passwordValidate=(value)=>{
-  const password_val=/^[a-z0-9_@\.]{8,}$/;
+  const password_val=/^.{6,}$/;
   
   if(!value){
     setPasswordError("Enter Your Password")
   }else if(!password_val.test(value)){
-    setPasswordError("Password must be 8 Characters")
+    setPasswordError("Enter valid password")
   }else{
     setPasswordError("")
   }

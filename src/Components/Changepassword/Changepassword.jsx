@@ -41,7 +41,6 @@ function ChangePassword() {
       setMessage(response.data.message);
       if(response.data.succes){
         setMessage('Password changed successfully');
-        setMessageColor('success')
         navigate('/login')
       }
     } catch (error) {
