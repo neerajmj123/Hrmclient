@@ -31,6 +31,7 @@ function ListUser(){
                 params :{
                     page : currentpage,
                     limit :itemsperpage,
+                    searchQuery : searchQuery
                 },
                     headers :{
                         'Authorization':`Bearer ${token}`,
@@ -46,7 +47,7 @@ function ListUser(){
         if(token){
         fetchData();
         }
-    },[token,currentpage,itemsperpage]);
+    },[token,currentpage,itemsperpage,searchQuery]);
     const handleViewUser = (userId) =>{
         if(userId  !== undefined){
             console.log("view button clicked for user Id",userId);
@@ -65,12 +66,14 @@ function ListUser(){
         }
     };
     const handleSearch = (e) =>{
-        setSearchQuery(e.target.value)
+        const searchKeyword =e.target.value;
+        setSearchQuery(searchKeyword)
+        setCurrentpage(1)
     };
-    const filteredData = data.filter(user => {
-        return user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.email.toLowerCase().includes(searchQuery.toLowerCase()) ;
-    });
+    // const filteredData = data.filter(user => {
+    //     return user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    //         user.email.toLowerCase().includes(searchQuery.toLowerCase()) ;
+    // });
     return(
         <>
         <div className="heading">
@@ -88,8 +91,8 @@ function ListUser(){
         { loading ? (
             <Spinner/>
         ):(
-        filteredData.length ?(
-            filteredData.map((user)=>(
+        data.length ?(
+            data.map((user)=>(
             <div className="box" key={user._id}>
                 <p><strong>Name :</strong>{user.name}</p>
                 <p><strong>Email:</strong>{user.email}</p>
