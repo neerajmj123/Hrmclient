@@ -7,6 +7,9 @@ import Content from "./Components/Content/Content";
 import ListUser from "./Components/ListUser/ListUser";
 import UserDetails from "./Components/UserDetails/UserDetails";
 import ChangePassword from "./Components/Changepassword/Changepassword";
+import ForgotPassword from "./Components/Forgotpassword/Forgotpassword";
+import Resetpassword from "./Components/Resetpassword/Resetpassword";
+import Employee from "./Components/Employee/Employee";
 function App() {
 
   return (
@@ -20,6 +23,9 @@ function App() {
         <Route path="/list" Component={ListUser}/>
         <Route path="/userDetails/:userId" Component={UserDetails}/>
         <Route path="/changePassword" Component={ChangePassword}/>
+        <Route path="/employee" Component={Employee}/>
+        <Route path="/forgetpassword" Component={ForgotPassword}/>
+        <Route path="/passwordreset" Component={Resetpassword}/>
         </Routes>
       </Router>
 

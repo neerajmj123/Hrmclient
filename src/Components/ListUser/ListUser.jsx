@@ -11,6 +11,7 @@ function ListUser(){
     const [currentpage,setCurrentpage] = useState(1);
     const [itemsperpage] = useState(5)
     const [totalpage,setTotalpage]= useState(1)
+    const [searchQuery,setSearchQuery]=useState('')
 
 
     useEffect(()=>{
@@ -63,16 +64,32 @@ function ListUser(){
             setCurrentpage(currentpage-1)
         }
     };
+    const handleSearch = (e) =>{
+        setSearchQuery(e.target.value)
+    };
+    const filteredData = data.filter(user => {
+        return user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchQuery.toLowerCase()) ;
+    });
     return(
         <>
         <div className="heading">
             <h1>Users List</h1>
         </div>
+        <div className="search-container">
+                <input
+                    className="searcbox"
+                    type="text"
+                    placeholder="Search by name,email"
+                    value={searchQuery}
+                    onChange={handleSearch}
+                />
+            </div>
         { loading ? (
             <Spinner/>
         ):(
-        data.length ?(
-            data.map((user)=>(
+        filteredData.length ?(
+            filteredData.map((user)=>(
             <div className="box" key={user._id}>
                 <p><strong>Name :</strong>{user.name}</p>
                 <p><strong>Email:</strong>{user.email}</p>

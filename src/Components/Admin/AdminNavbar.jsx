@@ -38,9 +38,9 @@ function AdminNavbar() {
             <Link to={"/list"} className='addbtn'>
               View Employee
             </Link>
-            <Link to={"/changePassword"} className='addbtn'>
+            {/* <Link to={"/changePassword"} className='addbtn'>
               Change Password
-            </Link>
+            </Link> */}
           </div>
         </div>
 

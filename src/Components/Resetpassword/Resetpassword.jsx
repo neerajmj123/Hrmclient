@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Resetpassword.css'
 
-function ResetPassword() {
+function Resetpassword() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -14,7 +15,7 @@ function ResetPassword() {
  },[])
 
 
-  const handleChange = (e) => {
+  const handleChange =  (e) => {
     const { name, value } = e.target;
     if (name === 'password') setPassword(value);
     if (name === 'confirmPassword') setConfirmPassword(value);
@@ -34,7 +35,11 @@ function ResetPassword() {
         },
         
       });
+      if(response.status === 200){
       setMessage(response.data.message);
+      }else{
+        setMessage("Failed to reset password")
+      }
     } catch (error) {
       setMessage('Error: Unable to reset password');
       console.error(error);
@@ -42,9 +47,10 @@ function ResetPassword() {
   };
 
   return (
-    <div>
-      <h2>Reset Password</h2>
+    <div className='wrapper'>
+      <div className='resetpwd'>
       <form onSubmit={handleSubmit}>
+      <h2>Reset Password</h2>
         <div>
           <label htmlFor="password">New Password:</label>
           <input
@@ -66,10 +72,11 @@ function ResetPassword() {
           />
         </div>
         <button type="submit">Reset Password</button>
-      </form>
       {message && <p>{message}</p>}
+      </form>
+    </div>
     </div>
   );
 }
 
-export default ResetPassword;
+export default Resetpassword;

@@ -38,6 +38,15 @@ h1{
     width: 80px;
     margin: 10px;
 }
+.search-container input{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25%;
+    margin-bottom: 20px;
+
+}
 
 /* @media screen and (max-width:768px) {
  .box{

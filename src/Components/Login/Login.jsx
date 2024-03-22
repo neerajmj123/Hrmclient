@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import './Login.css'
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -61,15 +61,29 @@ const passwordValidate=(value)=>{
     })
 
       if (response.data.success) {
-        const token = response.data.data;
+        const { token ,lastLogin,user_type} = response.data.data;
+        // const token = response.data.data;
         localStorage.setItem('token', token);
+
+        const userTypemap ={
+          '65bb1a7d13faaff4f7e60713': 'admin',
+          '65bb1a7e13faaff4f7e60714':'employee'
+        }
+        const usertype = userTypemap[user_type]
        Swal.fire({
         icon : 'success',
         title :'Login Successfull',
         text : response.data.message,
         // background : 'rgba(0,0,0,0.8)',
-       }).then(()=>{
-        navigate('/admin')
+       }).then((result)=>{
+        if(result.isConfirmed){
+          if(!lastLogin){
+            navigate('/changePassword')
+          }else{
+            navigate(usertype === 'admin' ? '/admin' : '/employee');
+          }
+        }
+        
        })
       } else {
         Swal.fire({
@@ -103,6 +117,7 @@ const passwordValidate=(value)=>{
             {passworderror && <div className="error">{passworderror}</div>}
           </div>
           <button type="submit" className="btn">Login</button>
+          <Link to = '/forgetpassword'>Forgot Password</Link>
         </form>
         </div>
       </div>

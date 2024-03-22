@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Changepassword.css'
 import { useNavigate } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 
 function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -38,20 +38,19 @@ function ChangePassword() {
         }
       }
       );
-      setMessage(response.data.message);
-      if(response.data.succes){
-        setMessage('Password changed successfully');
-        navigate('/login')
-      }
-    } catch (error) {
-      setMessage('Error: Unable to change password');
-      console.error("front end erroe",error);
-      if(error.response){
-        console.error('server error',error.response.data)
-      }
-    }
-  };
 
+      Swal.fire({
+        icon:"success",
+        title:'Success',
+        text:response.data.message
+      }).then(()=>{
+        navigate('/login')
+      })
+    } catch (error) {
+      console.error('Error:',error);
+      setMessage("failed to chnage password")
+      }
+    };
   return (
     <div className='wrapper'>
       <div className='resetform'>
