@@ -29,7 +29,7 @@ function Resetpassword() {
     }
 
     try {
-      const response = await axios.patch('http://localhost:3000/passwordreset', {password},{
+      const response = await axios.patch('http://localhost:3100/passwordreset', {password},{
         headers:{
             Authorization:`Bearer${token}`
         },

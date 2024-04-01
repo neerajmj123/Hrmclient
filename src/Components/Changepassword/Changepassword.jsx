@@ -27,7 +27,7 @@ function ChangePassword() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.patch('http://localhost:3000/changePassword', 
+      const response = await axios.patch('http://localhost:3100/changePassword', 
       {
         currentPassword,
         newPassword,

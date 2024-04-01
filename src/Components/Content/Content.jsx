@@ -104,7 +104,7 @@ function Content(){
 
       // console.log("token",token)
     
-      const response = await axios.post('http://localhost:3000/createUser',values,{
+      const response = await axios.post('http://localhost:3100/createUser',values,{
       
         headers:{
           Authorization:`Bearer ${token}`,

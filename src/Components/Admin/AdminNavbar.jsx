@@ -6,26 +6,6 @@ function AdminNavbar() {
   return (
     <>
       <nav>
-        {/* <div className="navbar">
-          <ul className="link">
-            <li>
-              <a href="">Home</a>
-            </li>
-            <li>
-              <a href="">About</a>
-            </li>
-            <li>
-              <a href="">Services</a>
-            </li>
-            <li>
-              <a href="">Contact</a>
-            </li>
-          </ul>
-          <a href="#" className="action-btn">Admin
-            <img src={image} alt="" />
-          </a>
-
-        </div> */}
         <div className="intro ">
           <div className="content">
             <img src={image} alt="" />
@@ -38,13 +18,8 @@ function AdminNavbar() {
             <Link to={"/list"} className='addbtn'>
               View Employee
             </Link>
-            {/* <Link to={"/changePassword"} className='addbtn'>
-              Change Password
-            </Link> */}
           </div>
         </div>
-
-        {/* <Admindrop/> */}
       </nav>
     </>
   )

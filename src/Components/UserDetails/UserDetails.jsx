@@ -11,7 +11,7 @@ function UserDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/getuser/${userId}`)
+        const response = await axios.get(`http://localhost:3100/getuser/${userId}`)
         setUser(response.data);
       } catch (error) {
         console.error('Error fetching user details', error);
@@ -25,7 +25,7 @@ function UserDetails() {
   }
   const handleSubmit = async (values) => {
     try {
-      await axios.put(`http://localhost:3000/updateUser/${userId}`, values);
+      await axios.put(`http://localhost:3100/updateUser/${userId}`, values);
       window.alert("Data updated successfully");
       console.log("Data updated succesfully")
     } catch (error) {

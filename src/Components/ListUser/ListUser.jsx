@@ -26,7 +26,7 @@ function ListUser(){
     useEffect(()=>{
         const fetchData = async ()=>{
             try {
-                const response = await axios.get(`http://localhost:3000/getuser`,{
+                const response = await axios.get(`http://localhost:3100/getuser`,{
 
                 params :{
                     page : currentpage,

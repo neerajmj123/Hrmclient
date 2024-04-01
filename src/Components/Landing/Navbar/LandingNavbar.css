@@ -35,7 +35,6 @@ display: flex;
 gap: 2rem;
 }
 .action-btn{
-    /* background-color: rgb(130, 107, 79); */
     color: white;
     border: 2px solid rgba(225,225,225,2);
     padding: 0.5rem 1rem;

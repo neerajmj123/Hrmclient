@@ -15,7 +15,7 @@ function ForgotPassword() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/forgetpassword', { email });
+      const response = await axios.post('http://localhost:3100/forgetpassword', { email });
       setMessage(response.data.message);
       if(response.status === 200){
         Swal.fire({
